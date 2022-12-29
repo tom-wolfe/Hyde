@@ -29,7 +29,8 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v3
-    - name: Pack
-      run: dotnet pack --configuration Release
+    # Project file is configured to generate .nupkg on build
+    - name: Build
+      run: dotnet build --configuration Release 
     - name: Publish
-      run: dotnet nuget push "*.nupkg" -k ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push "./dist/*.nupkg" -k ${{secrets.NUGET_API_KEY}}
