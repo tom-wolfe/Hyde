@@ -33,4 +33,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release 
     - name: Publish
-      run: dotnet nuget push "./dist/*.nupkg" -k ${{secrets.NUGET_API_KEY}}
+      run: >
+        dotnet nuget push "./dist/*.nupkg"
+        -k ${{secrets.NUGET_API_KEY}}
+        -s https://api.nuget.org/v3/index.json
