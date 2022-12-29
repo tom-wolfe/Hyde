@@ -1,9 +1,26 @@
-﻿namespace Hyde.Mutator;
+namespace Hyde.Mutator;
 
+/// <summary>
+/// Represents the result of a call to <see cref="ISiteMutator.Mutate"/>.
+/// </summary>
 internal interface ISiteMutateResult
 {
+    /// <summary>
+    /// Gets the name of the <see cref="ISiteMutator"/> that this result is for.
+    /// </summary>
     string Name { get; }
+
+    /// <summary>
+    /// Gets the length of time it took the mutator to execute.
+    /// </summary>
     public TimeSpan Duration { get; }
+
+    /// <summary>
+    /// Writes the result to the given logger.
+    /// </summary>
+    /// <param name="logger">The logger to which this result will be written.</param>
+    /// <param name="padding"></param>
+    /// <param name="indent"></param>
     void Log(ILogger logger, int padding, int indent = 0);
 }
 

@@ -1,4 +1,4 @@
-﻿namespace Hyde.Domain;
+namespace Hyde.Domain;
 
 [DebuggerDisplay("{Name,nq}")]
 internal class SiteDirectory
@@ -39,6 +39,11 @@ internal class SiteDirectory
 
         _files.Add(file);
         file.SetParent(this);
+    }
+
+    public void RemoveFile(SiteFile file)
+    {
+        _files.Remove(file);
     }
 
     public SiteDirectory FindOrCreateDirectory(string name)

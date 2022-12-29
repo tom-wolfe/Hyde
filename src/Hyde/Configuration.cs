@@ -3,6 +3,7 @@ using Hyde.Builder;
 using Hyde.Logging;
 using Hyde.Mutator;
 using Hyde.Mutator.Assets;
+using Hyde.Mutator.Draft;
 using Hyde.Mutator.Link;
 using Hyde.Mutator.Markdown;
 using Hyde.Mutator.Metadata;
@@ -73,6 +74,7 @@ internal static class Configuration
                 var mutators = new List<ISiteMutator>
                 {
                     p.GetRequiredService<MetadataMutator>(),
+                    p.GetRequiredService<DraftMutator>(),
                     p.GetRequiredService<TasksMutator>(),
                     p.GetRequiredService<TagsMutator>(),
                     p.GetRequiredService<MarkdownMutator>(),
