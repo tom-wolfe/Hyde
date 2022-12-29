@@ -17,9 +17,16 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Build
-      run: dotnet build
+      run: dotnet build --configuration Release
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --verbosity normal
+    - name: Pack
+      run: dotnet pack --configuration Release
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: package
+        path: ./dist
 
   publish:
     needs: build
@@ -27,7 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-    - name: Pack
-      run: dotnet pack --configuration Release
+    - name: Download
+      uses: actions/download-artifact@v3
+      with:
+        name: package
     - name: Publish
-      run: dotnet nuget push ./dist/ -k ${{secrets.NUGET_API_KEY}}
+      run: dotnet nuget push -k ${{secrets.NUGET_API_KEY}}
