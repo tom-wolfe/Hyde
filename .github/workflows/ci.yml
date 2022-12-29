@@ -37,6 +37,6 @@ jobs:
     - name: Download
       uses: actions/download-artifact@v3
       with:
-        - name: package
+        name: package
     - name: Publish
       run: dotnet nuget push -k ${{secrets.NUGET_API_KEY}}
