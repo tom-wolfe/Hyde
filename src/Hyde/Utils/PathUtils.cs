@@ -6,7 +6,8 @@ internal static class PathUtils
 
     public static string Absolutify(string href, FileBasedSiteFile file)
     {
-        if (Path.IsPathFullyQualified(href)) { return href; }
+        if (Path.IsPathFullyQualified(href))
+        { return href; }
 
         var sourceDir = Path.GetDirectoryName(file.SourcePath);
         var absoluteLink = Path.Join(sourceDir, href);
@@ -18,8 +19,10 @@ internal static class PathUtils
         var result = path;
         foreach (var sep in DirectorySeparators)
         {
-            if (result.StartsWith(sep)) { result = result[1..]; }
-            if (result.EndsWith(sep)) { result = result[..1]; }
+            if (result.StartsWith(sep))
+            { result = result[1..]; }
+            if (result.EndsWith(sep))
+            { result = result[..1]; }
         }
         return result;
     }

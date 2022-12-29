@@ -72,16 +72,19 @@ internal class SearchMutator : ISiteMutator
             var contents = await file.GetContents();
             var description = file.Metadata!.GetValueOrDefault("description", null)?.ToString();
 
-            if (string.IsNullOrWhiteSpace(contents) && string.IsNullOrWhiteSpace(description)) { return; }
+            if (string.IsNullOrWhiteSpace(contents) && string.IsNullOrWhiteSpace(description))
+            { return; }
 
             if (!file.Metadata.TryGetValue("title", out var title))
             {
-                this._logger.LogError("{file} does not have a title", file.GetRelativePath()); ;
+                this._logger.LogError("{file} does not have a title", file.GetRelativePath());
+                ;
             }
 
             if (!file.Metadata.TryGetValue("icon", out var icon))
             {
-                this._logger.LogWarning("{file} does not have an icon", file.GetRelativePath()); ;
+                this._logger.LogWarning("{file} does not have an icon", file.GetRelativePath());
+                ;
             }
 
             if (file.Extension == ".html")

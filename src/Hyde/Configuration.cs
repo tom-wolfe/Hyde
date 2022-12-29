@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging.Console;
 using System.Reflection;
 using Hyde.Builder;
 using Hyde.Logging;
@@ -19,6 +18,7 @@ using Hyde.Serializer;
 using Hyde.Services.FileFinder;
 using Hyde.Services.LinkResolver;
 using Hyde.Services.Metadata;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Hyde;
 

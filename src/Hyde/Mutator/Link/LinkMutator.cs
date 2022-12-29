@@ -29,7 +29,8 @@ internal class LinkMutator : FileMutator
             foreach (var link in links)
             {
                 var hrefAttribute = link.Attributes["href"];
-                if (hrefAttribute == null) { continue; }
+                if (hrefAttribute == null)
+                { continue; }
 
                 var href = hrefAttribute.Value;
 

@@ -16,8 +16,10 @@ public class NaturalStringComparer : IComparer<string?>
     public int Compare(string? left, string? right)
     {
         // Base cases
-        if (left == null) { return ComparerUtils.LeftBeforeRight; }
-        if (right == null) { return ComparerUtils.RightBeforeLeft; }
+        if (left == null)
+        { return ComparerUtils.LeftBeforeRight; }
+        if (right == null)
+        { return ComparerUtils.RightBeforeLeft; }
         if (this._stringComparer.Equals(left, right))
         {
             return ComparerUtils.BothEqual;
@@ -32,11 +34,14 @@ public class NaturalStringComparer : IComparer<string?>
             var lSegment = lReader.ReadNextSegment();
             var rSegment = rReader.ReadNextSegment();
 
-            if (left == null) { return ComparerUtils.LeftBeforeRight; }
-            if (right == null) { return ComparerUtils.RightBeforeLeft; }
+            if (left == null)
+            { return ComparerUtils.LeftBeforeRight; }
+            if (right == null)
+            { return ComparerUtils.RightBeforeLeft; }
 
             var comparison = this._segmentComparer.Compare(lSegment, rSegment);
-            if (comparison != ComparerUtils.BothEqual) { return comparison; }
+            if (comparison != ComparerUtils.BothEqual)
+            { return comparison; }
         }
     }
 }

@@ -29,7 +29,8 @@ internal class FindCustomFunction : IScriptCustomFunction
     public object Invoke(TemplateContext context, ScriptNode callerContext, ScriptArray arguments, ScriptBlockStatement blockStatement)
     {
         context.CurrentGlobal.TryGetValue("site", out var siteObj);
-        if (siteObj is not Site site) { return null!; }
+        if (siteObj is not Site site)
+        { return null!; }
         var query = arguments[0].ToString();
         return this._finder.Find(site, query)!;
     }

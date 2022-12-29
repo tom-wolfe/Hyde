@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Hyde.Domain;
+﻿namespace Hyde.Domain;
 
 [DebuggerDisplay("{SourcePath,nq}")]
 internal class FileBasedSiteFile : SiteFile

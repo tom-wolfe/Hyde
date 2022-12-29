@@ -31,7 +31,8 @@ internal class YamlMetadataExtractor : IMetadataExtractor
             while (true)
             {
                 var nextLine = await reader.ReadLineAsync();
-                if (nextLine == YamlMarker) { break; }
+                if (nextLine == YamlMarker)
+                { break; }
 
                 yaml.AppendLine(nextLine);
             }

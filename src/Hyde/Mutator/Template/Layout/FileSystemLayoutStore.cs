@@ -35,7 +35,8 @@ internal class FileSystemLayoutStore : ILayoutStore
 
     public async ValueTask<SiteLayout> GetLayout(string template, CancellationToken cancellationToken = default)
     {
-        if (this._layoutCache.TryGetValue(template, out var cachedLayout)) { return cachedLayout; }
+        if (this._layoutCache.TryGetValue(template, out var cachedLayout))
+        { return cachedLayout; }
 
         var layoutPath = this.FindLayoutFilePath(template);
         var layoutText = await File.ReadAllTextAsync(layoutPath, cancellationToken);
@@ -58,7 +59,8 @@ internal class FileSystemLayoutStore : ILayoutStore
         var possibleNames = Extensions.Select(ext => template + ext).ToList();
         var possiblePaths = possibleNames.SelectMany(_ => this._options.IncludeDirectories, (file, directory) => Path.Join(directory, file));
         var match = possiblePaths.FirstOrDefault(File.Exists);
-        if (match == null) throw new InvalidOperationException("Template not found: " + template);
+        if (match == null)
+            throw new InvalidOperationException("Template not found: " + template);
         return match;
     }
 }

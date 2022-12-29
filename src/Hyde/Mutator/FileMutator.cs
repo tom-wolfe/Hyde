@@ -30,7 +30,8 @@ internal abstract class FileMutator : ISiteMutator
 
     protected virtual Task MutateDirectory(Site site, SiteDirectory? directory, CancellationToken cancellationToken = default)
     {
-        if (directory == null) { return Task.CompletedTask; }
+        if (directory == null)
+        { return Task.CompletedTask; }
         var dirTasks = directory.Directories.Select(subDir => this.MutateDirectory(site, subDir, cancellationToken));
         var fileTasks = directory.Files.Where(this.FileFilter).Select(file => this.MutateFileSafe(site, directory, file, cancellationToken));
         return Task.WhenAll(dirTasks.Union(fileTasks));

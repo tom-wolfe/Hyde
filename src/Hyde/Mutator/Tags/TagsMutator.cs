@@ -14,7 +14,8 @@ internal class TagsMutator : CollectorMutator<SiteFileTag>
         {
             var contents = await file.GetContents();
             file.Metadata.TryGetValue("tags", out var tags);
-            if (tags is not IEnumerable<object> tagList) { return; }
+            if (tags is not IEnumerable<object> tagList)
+            { return; }
             var stringTagList = tagList
                 .Select(t => t.ToString())
                 .Where(s => !string.IsNullOrWhiteSpace(s));

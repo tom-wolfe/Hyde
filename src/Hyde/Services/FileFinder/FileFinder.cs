@@ -38,7 +38,8 @@ internal class FileFinder : IFileFinder
     {
         bool FindByTitle(SiteFile file)
         {
-            if (file is not FileBasedSiteFile targetFile) { return false; }
+            if (file is not FileBasedSiteFile targetFile)
+            { return false; }
             var targetUri = new Uri(targetFile.SourcePath, UriKind.Absolute);
             return targetUri.Equals(uri);
         }

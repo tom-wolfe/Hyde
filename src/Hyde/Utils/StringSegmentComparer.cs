@@ -11,8 +11,10 @@ internal class StringSegmentComparer : IComparer<StringSegment?>
 
     public int Compare(StringSegment? left, StringSegment? right)
     {
-        if (left == null) { return ComparerUtils.LeftBeforeRight; }
-        if (right == null) { return ComparerUtils.RightBeforeLeft; }
+        if (left == null)
+        { return ComparerUtils.LeftBeforeRight; }
+        if (right == null)
+        { return ComparerUtils.RightBeforeLeft; }
 
         if (left.Type != StringSegmentType.Number)
         {

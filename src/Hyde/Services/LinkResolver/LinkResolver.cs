@@ -23,11 +23,12 @@ internal class LinkResolver : ILinkResolver
         var restOfLink = linkParts.ElementAtOrDefault(1);
 
         var text = restOfLink ?? title ?? content;
-        if (text == null) return new LinkResolutionResult
-        {
-            Link = url,
-            Class = null
-        };
+        if (text == null)
+            return new LinkResolutionResult
+            {
+                Link = url,
+                Class = null
+            };
 
         if (!this._options.Protocols.TryGetValue(protocol, out var resolver))
         {
@@ -53,7 +54,8 @@ internal class LinkResolver : ILinkResolver
                     };
                 }
                 break;
-            default: throw new ArgumentOutOfRangeException();
+            default:
+                throw new ArgumentOutOfRangeException();
         }
 
         return null;

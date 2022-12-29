@@ -10,7 +10,8 @@ internal class ColoredConsoleFormatter : ConsoleFormatter
     public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
     {
         var message = logEntry.Formatter?.Invoke(logEntry.State, logEntry.Exception);
-        if (message is null) { return; }
+        if (message is null)
+        { return; }
 
         textWriter.Write(DateTime.UtcNow.ToString("hh:mm:ss.fff"));
         textWriter.Write(" ");
