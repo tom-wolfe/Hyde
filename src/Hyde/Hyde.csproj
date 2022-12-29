@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>hyde</ToolCommandName>
+    <PackageOutputPath>../../dist</PackageOutputPath>
+    <Authors>Thomas R. Wolfe</Authors>
+    <Copyright>Copyright 2022 Thomas R. Wolfe</Copyright>
+    <PackageTags>ssg;static;generator;markdown;cli;build;tool;utility</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/tom-wolfe/Hyde.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tom-wolfe/Hyde</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>An extendable static site generator.</Description>
+    <RootNamespace>Hyde</RootNamespace>
+    <AssemblyVersion>0.0.2</AssemblyVersion>
+    <Version>$(AssemblyVersion)</Version>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <Title>Hyde</Title>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <PackageId>HydeDotNet</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
