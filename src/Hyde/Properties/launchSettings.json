@@ -2,7 +2,7 @@
   "profiles": {
     "Hyde": {
       "commandName": "Project",
-      "commandLineArgs": "D:\\Development\\edyria\\src\\player.json"
+      "commandLineArgs": ""
     }
   }
 }
