@@ -1,5 +1,7 @@
 # Hyde
 
+![Nuget](https://img.shields.io/nuget/v/HydeDotNet) ![GitHub](https://img.shields.io/github/license/tom-wolfe/Hyde) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tom-wolfe/Hyde/ci.yml) ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/nuget/HydeDotNet)
+
 Hyde is an extendable static site generator written in .NET with support for templating, markdown, frontmatter and SASS via libraries like [Scriban](https://github.com/scriban/scriban), [Markdig](https://github.com/xoofx/markdig), [YamlDotNet](https://github.com/aaubry/YamlDotNet) and [LibSassHost](https://github.com/Taritsyn/LibSassHost).
 
 ## Installation
