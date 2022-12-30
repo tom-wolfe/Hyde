@@ -48,7 +48,7 @@ internal abstract class FileMutator : ISiteMutator
         }
         catch (Exception ex)
         {
-            this.Logger.LogError(ex, "Error mutating {file}: {message}", file.GetRelativePath(), ex.Message);
+            this.Logger.LogError(ex, "Error mutating {File}: {Message}", file.GetRelativePath(), ex.Message);
         }
     }
 

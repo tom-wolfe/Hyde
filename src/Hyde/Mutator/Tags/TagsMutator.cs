@@ -26,7 +26,7 @@ internal class TagsMutator : CollectorMutator<SiteFileTag>
         }
         catch (Exception ex)
         {
-            this.Logger.LogError(ex, "Error reading {file}: {message}", file.GetRelativePath(), ex.Message);
+            this.Logger.LogError(ex, "Error reading {File}: {Message}", file.GetRelativePath(), ex.Message);
         }
     }
 

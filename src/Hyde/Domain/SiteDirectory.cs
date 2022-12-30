@@ -8,43 +8,41 @@ internal class SiteDirectory
 
     public SiteDirectory(string name)
     {
-        Name = name;
-        Directories = _directories.AsReadOnly();
-        Files = _files.AsReadOnly();
+        this.Name = name;
+        this.Directories = this._directories.AsReadOnly();
+        this.Files = this._files.AsReadOnly();
     }
 
     public IEnumerable<SiteDirectory> Directories { get; }
     public IEnumerable<SiteFile> Files { get; }
-    public IEnumerable<SiteFile> FilesExcludingIndex => _files.Where(f => !f.IsIndex).ToList();
+    public IEnumerable<SiteFile> FilesExcludingIndex => this._files.Where(f => !f.IsIndex).ToList();
     public SiteFile? Index { get; private set; }
     public SiteDirectory? Parent { get; private set; }
     public string Name { get; }
 
     public void AddDirectory(SiteDirectory directory)
     {
-        if (_directories.Contains(directory))
+        if (this._directories.Contains(directory))
         { return; }
-        _directories.Add(directory);
+
+        this._directories.Add(directory);
         directory.SetParent(this);
     }
 
     public void AddFile(SiteFile file)
     {
-        if (_files.Contains(file))
+        if (this._files.Contains(file))
         { return; }
         if (file.IsIndex)
         {
-            Index = file;
+            this.Index = file;
         }
 
-        _files.Add(file);
+        this._files.Add(file);
         file.SetParent(this);
     }
 
-    public void RemoveFile(SiteFile file)
-    {
-        _files.Remove(file);
-    }
+    public void RemoveFile(SiteFile file) => this._files.Remove(file);
 
     public SiteDirectory FindOrCreateDirectory(string name)
     {
@@ -53,11 +51,11 @@ internal class SiteDirectory
         var hasSlash = firstSlash != -1;
         var dirName = hasSlash ? name[..firstSlash] : name;
 
-        var dir = Directories.FirstOrDefault(d => d.Name.Equals(dirName, StringComparison.OrdinalIgnoreCase));
+        var dir = this.Directories.FirstOrDefault(d => d.Name.Equals(dirName, StringComparison.OrdinalIgnoreCase));
         if (dir == null)
         {
             dir = new SiteDirectory(dirName);
-            AddDirectory(dir);
+            this.AddDirectory(dir);
         }
 
         if (hasSlash)
@@ -71,15 +69,16 @@ internal class SiteDirectory
 
     public string GetRelativePath()
     {
-        var parent = Parent?.GetRelativePath() ?? "/";
-        return parent == "/" ? $"/{Name}" : $"{parent}/{Name}";
+        var parent = this.Parent?.GetRelativePath() ?? "/";
+        return parent == "/" ? $"/{this.Name}" : $"{parent}/{this.Name}";
     }
 
     private void SetParent(SiteDirectory parent)
     {
-        if (Parent == parent)
+        if (this.Parent == parent)
         { return; }
-        Parent = parent;
-        Parent.AddDirectory(this);
+
+        this.Parent = parent;
+        this.Parent.AddDirectory(this);
     }
 }

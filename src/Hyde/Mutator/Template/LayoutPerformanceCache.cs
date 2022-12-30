@@ -12,13 +12,7 @@ internal class LayoutPerformanceCache
         layout.Add(time);
     }
 
-    public Dictionary<string, TimeSpan> GetAverageTimes()
-    {
-        return this._layoutRuns.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Average());
-    }
+    public Dictionary<string, TimeSpan> GetAverageTimes() => this._layoutRuns.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Average());
 
-    public Dictionary<string, TimeSpan> GetTotalTimes()
-    {
-        return this._layoutRuns.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Sum());
-    }
+    public Dictionary<string, TimeSpan> GetTotalTimes() => this._layoutRuns.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Sum());
 }

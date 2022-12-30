@@ -86,11 +86,11 @@ internal class TemplateMutator : ISiteMutator
         }
         catch (ScriptRuntimeException ex)
         {
-            this._logger.LogError(ex, "Error rendering file {file}: {message}", file.GetRelativePath(), ex.InnerException?.Message ?? ex.Message);
+            this._logger.LogError(ex, "Error rendering file {File}: {Message}", file.GetRelativePath(), ex.InnerException?.Message ?? ex.Message);
         }
         catch (Exception ex)
         {
-            this._logger.LogError(ex, "Error rendering file {file}: {message}", file.GetRelativePath(), ex.Message);
+            this._logger.LogError(ex, "Error rendering file {File}: {Message}", file.GetRelativePath(), ex.Message);
         }
     }
 

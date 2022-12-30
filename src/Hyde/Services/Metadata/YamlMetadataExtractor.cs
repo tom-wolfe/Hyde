@@ -24,7 +24,7 @@ internal class YamlMetadataExtractor : IMetadataExtractor
         var reader = new StringReader(contents);
 
         var metadata = new Dictionary<string, object?>();
-        if (contents.StartsWith(YamlMarker))
+        if (contents.StartsWith(YamlMarker, StringComparison.OrdinalIgnoreCase))
         {
             await reader.ReadLineAsync();
             var yaml = new StringBuilder();

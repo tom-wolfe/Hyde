@@ -60,7 +60,10 @@ internal class FileSystemLayoutStore : ILayoutStore
         var possiblePaths = possibleNames.SelectMany(_ => this._options.IncludeDirectories, (file, directory) => Path.Join(directory, file));
         var match = possiblePaths.FirstOrDefault(File.Exists);
         if (match == null)
+        {
             throw new InvalidOperationException("Template not found: " + template);
+        }
+
         return match;
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Hyde.Utils;
+﻿using System.Globalization;
+
+namespace Hyde.Utils;
 
 internal class StringSegmentComparer : IComparer<StringSegment?>
 {
@@ -28,8 +30,8 @@ internal class StringSegmentComparer : IComparer<StringSegment?>
             return ComparerUtils.LeftBeforeRight;
         }
 
-        var lNum = int.Parse(left.Value);
-        var rNum = int.Parse(right.Value);
+        var lNum = int.Parse(left.Value, NumberStyles.Any, CultureInfo.InvariantCulture);
+        var rNum = int.Parse(right.Value, CultureInfo.InvariantCulture);
 
         if (lNum == rNum)
         {

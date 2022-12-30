@@ -37,11 +37,11 @@ internal class LinkMutator : FileMutator
                 // Skip links with protocol settings http://
                 if (href.Contains("://"))
                 {
-                    this.Logger.LogDebug("Skipping link with protocol: {href}", href);
+                    this.Logger.LogDebug("Skipping link with protocol: {Link}", href);
                     continue;
                 }
 
-                this.Logger.LogDebug("Scanning link: {href}", href);
+                this.Logger.LogDebug("Scanning link: {Link}", href);
 
                 // See if it's any of the custom protocols like spell: or monster:
                 var resolvedLink = this._resolver.ResolveLink(site, href, link.Attributes["title"]?.Value, link.InnerText);
@@ -63,7 +63,7 @@ internal class LinkMutator : FileMutator
                     var linkedMatch = this._finder.Find(site, absoluteUri);
                     if (linkedMatch != null)
                     {
-                        this.Logger.LogDebug("Matching file found: {match}", linkedMatch.Name);
+                        this.Logger.LogDebug("Matching file found: {Match}", linkedMatch.Name);
                         hrefAttribute.Value = linkedMatch.GetRelativePath();
                     }
                 }
@@ -81,7 +81,7 @@ internal class LinkMutator : FileMutator
             document.Save(writer);
             var reader = new StreamReader(writer);
             writer.Position = 0;
-            var contents = await reader.ReadToEndAsync();
+            var contents = await reader.ReadToEndAsync(cancellationToken);
 
             file.SetContents(contents);
         }

@@ -9,10 +9,11 @@ internal class FileBasedSiteFile : SiteFile
         {
             sourcePath = Path.Join(Environment.CurrentDirectory, sourcePath);
         }
-        SourcePath = sourcePath;
+
+        this.SourcePath = sourcePath;
     }
 
     public string SourcePath { get; }
 
-    protected override Stream GetOriginalContentStream() => File.OpenRead(SourcePath);
+    protected override Stream GetOriginalContentStream() => File.OpenRead(this.SourcePath);
 }

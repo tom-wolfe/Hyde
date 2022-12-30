@@ -19,7 +19,7 @@ class SiteSerializer : ISiteSerializer
         }
 
         var stopwatch = Stopwatch.StartNew();
-        this._logger.LogInformation("Serializing site to {dir}", this._options.OutputDirectory);
+        this._logger.LogInformation("Serializing site to {Directory}", this._options.OutputDirectory);
         if (this._options.Clean)
         {
             this._logger.LogInformation("Cleaning output directory");

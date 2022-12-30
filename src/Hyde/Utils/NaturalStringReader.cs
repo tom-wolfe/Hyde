@@ -17,7 +17,10 @@ internal class NaturalStringReader
     {
         var nextChar = this._reader.Peek();
         if (nextChar == EndOfString)
+        {
             return null;
+        }
+
         return IsNumber(nextChar)
             ? this.ReadNumericSegment()
             : this.ReadStringSegment();

@@ -33,7 +33,7 @@ internal class AggregateSiteMutateResult : ISiteMutateResult
     public void Log(ILogger logger, int padding, int indent = 0)
     {
         var prefix = new string(' ', indent * 2);
-        logger.LogInformation("{name}: {time}", (prefix + this.Name).PadRight(padding), this.Duration);
+        logger.LogInformation("{Name}: {Time}", (prefix + this.Name).PadRight(padding), this.Duration);
         foreach (var result in this.Results)
         {
             result.Log(logger, padding, indent + 1);
@@ -49,6 +49,6 @@ internal class ScalarSiteMutateResult : ISiteMutateResult
     public void Log(ILogger logger, int padding, int indent = 0)
     {
         var prefix = new string('-', indent * 2);
-        logger.LogInformation("{name}: {time}", (prefix + this.Name).PadRight(padding), this.Duration);
+        logger.LogInformation("{Name}: {Time}", (prefix + this.Name).PadRight(padding), this.Duration);
     }
 }
