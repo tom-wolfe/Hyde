@@ -19,7 +19,7 @@ public static class Program
             Arity = ArgumentArity.ZeroOrOne
         };
 
-        var command = new RootCommand("Extendable static site generation.");
+        var command = new RootCommand("Extendable static site generation");
         command.AddArgument(projectArgument);
         command.SetHandler(BuildSite, projectArgument);
 
