@@ -1,0 +1,51 @@
+{
+  "read": {
+    "sourceDirectory": "./src/content",
+    "metadata": {
+      "title": "Hyde .NET Example"
+    }
+  },
+  "mutate": {
+    "templateMutator": {
+      "defaultTemplate": "default",
+      "includeDirectories": [
+        "./src/includes",
+        "./src/layouts"
+      ]
+    },
+    "stylesMutator": {
+      "stylesheet": "./src/styles/main.scss",
+      "includeDirectories": [
+        "./styles"
+      ]
+    },
+    "metadataMutator": {
+      "default": {
+        "template": "default",
+        "title": "",
+        "weight": 0
+      }
+    },
+    "assetsMutator": {
+      "assets": {
+
+      }
+    },
+    "linkMutator": {
+      "protocols": {
+        "github": {
+          "type": "format",
+          "format": "https://www.github.com/{link}",
+          "class": "github"
+        },
+        "lookup": {
+          "type": "lookup"
+        }
+      }
+    }
+  },
+  "serialize": {
+    "clean": true,
+    "outputDirectory": "./dist"
+  }
+}
