@@ -16,7 +16,7 @@
     "stylesMutator": {
       "stylesheet": "./src/styles/main.scss",
       "includeDirectories": [
-        "./styles"
+        "./src/styles"
       ]
     },
     "metadataMutator": {
