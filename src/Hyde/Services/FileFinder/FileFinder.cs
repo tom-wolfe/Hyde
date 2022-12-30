@@ -2,7 +2,7 @@
 
 internal class FileFinder : IFileFinder
 {
-    public SiteFile? Find(Site site, params string?[] query) => Search(site, query).FirstOrDefault();
+    public SiteFile? Find(Site site, params string?[] query) => this.Search(site, query).FirstOrDefault();
     public SiteFile? Find(Site site, Uri uri)
     {
         if (site.Root == null)
@@ -18,7 +18,7 @@ internal class FileFinder : IFileFinder
         {
             throw new InvalidOperationException("Site with null root.");
         }
-        return Search(site.Root, query);
+        return this.Search(site.Root, query);
     }
 
     private IEnumerable<SiteFile> Search(SiteDirectory directory, params string?[] query)

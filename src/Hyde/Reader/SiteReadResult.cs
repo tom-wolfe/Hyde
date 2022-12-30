@@ -11,8 +11,5 @@ internal class SiteReadResult
 
     public TimeSpan Duration { get; init; } = TimeSpan.Zero;
 
-    public void Log(ILogger logger, int padding)
-    {
-        logger.LogInformation("{label}: {time}", "Read".PadRight(padding), this.Duration);
-    }
+    public void Log(ILogger logger, int padding) => logger.LogInformation("{Label}: {Time}", "Read".PadRight(padding), this.Duration);
 }

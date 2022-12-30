@@ -29,12 +29,12 @@ internal class SearchMutator : ISiteMutator
         this._logger.LogInformation("Mutation Started");
         var stopwatch = Stopwatch.StartNew();
 
-        var searchDir = site.Root.Directories.FirstOrDefault(d => d.Name.Equals("search"));
+        var searchDir = site.Root.Directories.FirstOrDefault(d => d.Name.Equals("search", StringComparison.OrdinalIgnoreCase));
 
         if (searchDir != null)
         {
             var index = new ConcurrentBag<SearchIndexEntry>();
-            await FillIndex(index, site.Root);
+            await this.FillIndex(index, site.Root);
             var json = JsonSerializer.Serialize(index.ToList(), new JsonSerializerOptions(JsonSerializerDefaults.Web) { WriteIndented = true });
 
             var dataFile = new VirtualSiteFile("data.json", json);
@@ -57,10 +57,10 @@ internal class SearchMutator : ISiteMutator
     private Task FillIndex(ConcurrentBag<SearchIndexEntry> index, SiteDirectory directory)
     {
         var dirTasks = directory.Directories
-            .Select(d => FillIndex(index, d));
+            .Select(d => this.FillIndex(index, d));
         var filTasks = directory.Files
             .Where(f => IndexExtensions.Contains(f.Extension))
-            .Select(f => FillIndex(index, f));
+            .Select(f => this.FillIndex(index, f));
 
         return Task.WhenAll(dirTasks.Union(filTasks));
     }
@@ -77,13 +77,13 @@ internal class SearchMutator : ISiteMutator
 
             if (!file.Metadata.TryGetValue("title", out var title))
             {
-                this._logger.LogError("{file} does not have a title", file.GetRelativePath());
+                this._logger.LogError("{File} does not have a title", file.GetRelativePath());
                 ;
             }
 
             if (!file.Metadata.TryGetValue("icon", out var icon))
             {
-                this._logger.LogWarning("{file} does not have an icon", file.GetRelativePath());
+                this._logger.LogWarning("{File} does not have an icon", file.GetRelativePath());
                 ;
             }
 
@@ -107,7 +107,7 @@ internal class SearchMutator : ISiteMutator
         }
         catch (Exception ex)
         {
-            this._logger.LogError(ex, "Error indexing {file}: {message}", file.GetRelativePath(), ex.Message);
+            this._logger.LogError(ex, "Error indexing {File}: {Message}", file.GetRelativePath(), ex.Message);
         }
     }
 }

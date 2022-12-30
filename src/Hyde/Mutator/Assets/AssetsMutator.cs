@@ -21,11 +21,11 @@ internal class AssetsMutator : ISiteMutator
             var attributes = File.GetAttributes(source);
             if (attributes.HasFlag(FileAttributes.Directory))
             {
-                this.CopyDirectory(site, source, target);
+                CopyDirectory(site, source, target);
             }
             else
             {
-                this.CopyFile(site, source, target);
+                CopyFile(site, source, target);
             }
         }
 
@@ -39,7 +39,7 @@ internal class AssetsMutator : ISiteMutator
         });
     }
 
-    private void CopyDirectory(Site site, string source, string target)
+    private static void CopyDirectory(Site site, string source, string target)
     {
         if (site.Root == null)
         {
@@ -52,16 +52,16 @@ internal class AssetsMutator : ISiteMutator
             var dirName = Path.GetFileName(dir);
             var newSource = Path.Join(source, dirName);
             var newTarget = Path.Join(target, dirName);
-            this.CopyDirectory(site, newSource, newTarget);
+            CopyDirectory(site, newSource, newTarget);
         }
 
         foreach (var file in Directory.GetFiles(source))
         {
-            this.CopyFile(file, targetDirectory);
+            CopyFile(file, targetDirectory);
         }
     }
 
-    private void CopyFile(Site site, string source, string target)
+    private static void CopyFile(Site site, string source, string target)
     {
         if (site.Root == null)
         {
@@ -73,17 +73,17 @@ internal class AssetsMutator : ISiteMutator
             var directory = Path.GetDirectoryName(target);
             var newName = Path.GetFileName(target);
             var parent = directory == null ? site.Root : site.Root.FindOrCreateDirectory(directory);
-            this.CopyFile(source, parent, newName);
+            CopyFile(source, parent, newName);
         }
         else
         {
             // Create file in directory.
             var parent = site.Root.FindOrCreateDirectory(target);
-            this.CopyFile(source, parent);
+            CopyFile(source, parent);
         }
     }
 
-    private void CopyFile(string source, SiteDirectory target, string? newName = null)
+    private static void CopyFile(string source, SiteDirectory target, string? newName = null)
     {
         // Create file in directory.
         var file = new FileBasedSiteFile(source);

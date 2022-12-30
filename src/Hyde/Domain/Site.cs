@@ -8,26 +8,22 @@ internal class Site
 
     public Site(string sourcePath)
     {
-        SourcePath = sourcePath;
+        this.SourcePath = sourcePath;
     }
 
-    public IReadOnlyDictionary<string, object?> Metadata => new ReadOnlyDictionary<string, object?>(_metadata);
+    public IReadOnlyDictionary<string, object?> Metadata => new ReadOnlyDictionary<string, object?>(this._metadata);
     public SiteDirectory? Root { get; private set; }
     public string SourcePath { get; }
 
-    public void SetRoot(SiteDirectory root)
-    {
-        Root = root;
-    }
+    public void SetRoot(SiteDirectory root) => this.Root = root;
 
-    public void AddMetadata(string key, object? value)
-    {
-        _metadata.Add(key, value);
-    }
+    public void AddMetadata(string key, object? value) => this._metadata.Add(key, value);
 
     public void AddMetadata(Dictionary<string, object?> metadata)
     {
         foreach (var (key, value) in metadata)
-            AddMetadata(key, value);
+        {
+            this.AddMetadata(key, value);
+        }
     }
 }

@@ -23,6 +23,6 @@ internal class SiteBuildResult
         this.Read.Log(logger, padding);
         this.Mutate.Log(logger, padding);
         this.Serialize.Log(logger, padding);
-        logger.LogInformation("{name}: {time}", "Total".PadRight(padding), this.Duration);
+        logger.LogInformation("{Name}: {Time}", "Total".PadRight(padding), this.Duration);
     }
 }

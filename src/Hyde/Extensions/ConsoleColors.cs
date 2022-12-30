@@ -1,3 +1,3 @@
 ﻿namespace Hyde.Extensions;
 
-record ConsoleColors(ConsoleColor? Foreground, ConsoleColor? Background);
+internal record ConsoleColors(ConsoleColor? Foreground, ConsoleColor? Background);

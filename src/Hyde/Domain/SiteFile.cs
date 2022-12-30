@@ -12,97 +12,87 @@ internal abstract class SiteFile : IComparable, IComparable<SiteFile>
 
     protected SiteFile(string name)
     {
-        Name = name;
+        this.Name = name;
     }
 
-    public string Extension => Path.GetExtension(Name);
-    public IReadOnlyDictionary<string, object?> Metadata => new ReadOnlyDictionary<string, object?>(_metadata);
+    public string Extension => Path.GetExtension(this.Name);
+    public IReadOnlyDictionary<string, object?> Metadata => new ReadOnlyDictionary<string, object?>(this._metadata);
     public string Name { get; private set; }
     public SiteDirectory? Parent { get; private set; }
-    public bool IsIndex => Name.StartsWith("index.", StringComparison.OrdinalIgnoreCase);
+    public bool IsIndex => this.Name.StartsWith("index.", StringComparison.OrdinalIgnoreCase);
 
     public void AddMetadata(IReadOnlyDictionary<string, object?> metadata, bool overwrite = true)
     {
         foreach (var (key, value) in metadata)
         {
-            if (_metadata.ContainsKey(key))
+            if (this._metadata.ContainsKey(key))
             {
                 if (overwrite)
                 {
-                    _metadata[key] = value;
+                    this._metadata[key] = value;
                 }
             }
             else
             {
-                _metadata.Add(key, value);
+                this._metadata.Add(key, value);
             }
         }
     }
 
     public async Task<string> GetContents()
     {
-        if (_contents == null)
+        if (this._contents == null)
         {
-            await using var stream = GetOriginalContentStream();
+            await using var stream = this.GetOriginalContentStream();
             using var reader = new StreamReader(stream);
-            _contents = await reader.ReadToEndAsync();
+            this._contents = await reader.ReadToEndAsync();
         }
-        return _contents;
+        return this._contents;
     }
 
     public Stream GetContentStream()
     {
-        if (_contents != null)
+        if (this._contents != null)
         {
-            return new MemoryStream(Encoding.UTF8.GetBytes(_contents));
+            return new MemoryStream(Encoding.UTF8.GetBytes(this._contents));
         }
-        return GetOriginalContentStream();
+        return this.GetOriginalContentStream();
     }
 
     public string GetRelativePath()
     {
-        var parent = Parent?.GetRelativePath() ?? "/";
-        var name = IsIndex ? "" : Name;
+        var parent = this.Parent?.GetRelativePath() ?? "/";
+        var name = this.IsIndex ? "" : this.Name;
         return parent == "/" ? $"/{name}" : $"{parent}/{name}";
     }
 
-    public void Rename(string newName)
-    {
+    public void Rename(string newName) =>
         // TODO: Validation like duplication, etc.
-        Name = newName;
-    }
+        this.Name = newName;
 
     public void SetContents(string? contents, string? newExtension = null)
     {
-        _contents = contents;
+        this._contents = contents;
         if (newExtension != null)
         {
-            ChangeExtension(newExtension);
+            this.ChangeExtension(newExtension);
         }
     }
 
     public void SetParent(SiteDirectory parent)
     {
-        if (Parent == parent)
+        if (this.Parent == parent)
         { return; }
-        Parent = parent;
-        Parent.AddFile(this);
+
+        this.Parent = parent;
+        this.Parent.AddFile(this);
     }
 
     protected abstract Stream GetOriginalContentStream();
 
-    private void ChangeExtension(string extension)
-    {
-        Name = Path.GetFileNameWithoutExtension(Name) + extension.ToLowerInvariant();
-    }
+    private void ChangeExtension(string extension) => this.Name = Path.GetFileNameWithoutExtension(this.Name) + extension.ToLowerInvariant();
 
-    public int CompareTo(SiteFile? other)
-    {
-        return 0;
-    }
+    public int CompareTo(SiteFile? other) => 0;
 
-    public int CompareTo(object? obj)
-    {
-        return 0;
-    }
+    public int CompareTo(object? obj) => 0;
 }

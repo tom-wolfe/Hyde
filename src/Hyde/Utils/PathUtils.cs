@@ -27,8 +27,5 @@ internal static class PathUtils
         return result;
     }
 
-    public static int IndexOfSeparator(string path)
-    {
-        return path.IndexOfAny(DirectorySeparators);
-    }
+    public static int IndexOfSeparator(string path) => path.IndexOfAny(DirectorySeparators);
 }

@@ -24,11 +24,13 @@ internal class LinkResolver : ILinkResolver
 
         var text = restOfLink ?? title ?? content;
         if (text == null)
+        {
             return new LinkResolutionResult
             {
                 Link = url,
                 Class = null
             };
+        }
 
         if (!this._options.Protocols.TryGetValue(protocol, out var resolver))
         {

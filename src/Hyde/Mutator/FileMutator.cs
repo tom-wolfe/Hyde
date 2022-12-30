@@ -1,4 +1,4 @@
-﻿namespace Hyde.Mutator;
+namespace Hyde.Mutator;
 
 internal abstract class FileMutator : ISiteMutator
 {
@@ -33,7 +33,8 @@ internal abstract class FileMutator : ISiteMutator
         if (directory == null)
         { return Task.CompletedTask; }
         var dirTasks = directory.Directories.Select(subDir => this.MutateDirectory(site, subDir, cancellationToken));
-        var fileTasks = directory.Files.Where(this.FileFilter).Select(file => this.MutateFileSafe(site, directory, file, cancellationToken));
+        var fileList = directory.Files.Where(this.FileFilter).ToList();
+        var fileTasks = fileList.Select(file => this.MutateFileSafe(site, directory, file, cancellationToken));
         return Task.WhenAll(dirTasks.Union(fileTasks));
     }
 
@@ -47,7 +48,7 @@ internal abstract class FileMutator : ISiteMutator
         }
         catch (Exception ex)
         {
-            this.Logger.LogError(ex, "Error mutating {file}: {message}", file.GetRelativePath(), ex.Message);
+            this.Logger.LogError(ex, "Error mutating {File}: {Message}", file.GetRelativePath(), ex.Message);
         }
     }
 

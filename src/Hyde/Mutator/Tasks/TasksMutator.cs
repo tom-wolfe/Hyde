@@ -25,7 +25,7 @@ internal class TasksMutator : CollectorMutator<SiteFileTasks>
         }
         catch (Exception ex)
         {
-            this.Logger.LogError(ex, "Error scanning {file}: {message}", file.GetRelativePath(), ex.Message);
+            this.Logger.LogError(ex, "Error scanning {File}: {Message}", file.GetRelativePath(), ex.Message);
         }
     }
 
