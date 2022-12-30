@@ -27,4 +27,12 @@
     <ProjectReference Include="..\..\src\Hyde\Hyde.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\Development\Hyde\tests\Hyde.Tests.Unit\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\Development\Hyde\tests\Hyde.Tests.Unit\.editorconfig" />
+  </ItemGroup>
+
 </Project>
