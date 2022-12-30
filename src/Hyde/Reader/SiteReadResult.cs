@@ -1,4 +1,4 @@
-﻿namespace Hyde.Reader;
+namespace Hyde.Reader;
 
 internal class SiteReadResult
 {
@@ -11,5 +11,5 @@ internal class SiteReadResult
 
     public TimeSpan Duration { get; init; } = TimeSpan.Zero;
 
-    public void Log(ILogger logger, int padding) => logger.LogInformation("{Label}: {Time}", "Read".PadRight(padding), this.Duration);
+    public void Write(ILogger logger, int padding) => logger.LogInformation("{Label}: {Time}", "Read".PadRight(padding), this.Duration);
 }

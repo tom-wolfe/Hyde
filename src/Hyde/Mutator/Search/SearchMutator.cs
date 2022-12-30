@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Text.Json;
 using HtmlAgilityPack;
 
@@ -26,7 +26,7 @@ internal class SearchMutator : ISiteMutator
             throw new InvalidOperationException("Site with null root.");
         }
 
-        this._logger.LogInformation("Mutation Started");
+        this._logger.LogDebug("Mutation Started");
         var stopwatch = Stopwatch.StartNew();
 
         var searchDir = site.Root.Directories.FirstOrDefault(d => d.Name.Equals("search", StringComparison.OrdinalIgnoreCase));
@@ -46,7 +46,7 @@ internal class SearchMutator : ISiteMutator
         }
 
         stopwatch.Stop();
-        this._logger.LogInformation("Mutation Complete");
+        this._logger.LogDebug("Mutation Complete");
         return new ScalarSiteMutateResult
         {
             Name = nameof(SearchMutator),

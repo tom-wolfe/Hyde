@@ -1,4 +1,4 @@
-﻿namespace Hyde.Mutator;
+namespace Hyde.Mutator;
 
 internal class AggregateMutator : ISiteMutator
 {
@@ -12,7 +12,6 @@ internal class AggregateMutator : ISiteMutator
     public async Task<ISiteMutateResult> Mutate(Site site, CancellationToken cancellationToken = default)
     {
         var results = new List<ISiteMutateResult>();
-        var duration = TimeSpan.Zero;
         foreach (var mutator in this._mutators)
         {
             var result = await mutator.Mutate(site, cancellationToken);

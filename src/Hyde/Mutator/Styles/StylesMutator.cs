@@ -1,4 +1,4 @@
-﻿using LibSassHost;
+using LibSassHost;
 
 namespace Hyde.Mutator.Styles;
 
@@ -20,12 +20,12 @@ internal class StylesMutator : ISiteMutator
             throw new InvalidOperationException("Site with null root.");
         }
 
-        this._logger.LogInformation("Mutation Started");
+        this._logger.LogDebug("Mutation Started");
         var stopwatch = Stopwatch.StartNew();
 
         if (this._options.Stylesheet == null)
         {
-            this._logger.LogInformation("No stylesheet, skipping SASS mutator.");
+            this._logger.LogDebug("No stylesheet, skipping SASS mutator.");
         }
         else
         {
@@ -52,7 +52,7 @@ internal class StylesMutator : ISiteMutator
         }
 
         stopwatch.Stop();
-        this._logger.LogInformation("Mutation Complete");
+        this._logger.LogDebug("Mutation Complete");
         return new ScalarSiteMutateResult { Name = nameof(StylesMutator), Duration = stopwatch.Elapsed };
     }
 }

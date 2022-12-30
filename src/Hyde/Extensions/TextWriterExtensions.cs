@@ -1,4 +1,4 @@
-﻿namespace Hyde.Extensions;
+namespace Hyde.Extensions;
 
 internal static class TextWriterExtensions
 {
@@ -12,6 +12,12 @@ internal static class TextWriterExtensions
         textWriter.Write(message);
         textWriter.Write(DefaultForegroundColor);
         textWriter.Write(DefaultBackgroundColor);
+    }
+
+    public static void WriteLineColored(this TextWriter textWriter, string message, ConsoleColors colors)
+    {
+        textWriter.WriteColored(message, colors);
+        textWriter.Write(Environment.NewLine);
     }
 
     private static string GetForegroundColorEscapeCode(ConsoleColor? color) =>

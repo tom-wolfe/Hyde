@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Hyde.Extensions;
 
@@ -30,6 +31,15 @@ internal static class ServiceExtensions
 
         typedConfigureMethod.Invoke(null, BindingFlags.InvokeMethod, null, parameters, null);
 
+        return services;
+    }
+
+    public static IServiceCollection AddRange(this IServiceCollection services, IServiceCollection source)
+    {
+        foreach (var service in source)
+        {
+            services.Add(service);
+        }
         return services;
     }
 }

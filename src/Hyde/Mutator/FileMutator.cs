@@ -14,9 +14,9 @@ internal abstract class FileMutator : ISiteMutator
         try
         {
             var stopwatch = Stopwatch.StartNew();
-            this.Logger.LogInformation("Mutation Started");
+            this.Logger.LogDebug("Mutation Started");
             await this.MutateDirectory(site, site.Root, cancellationToken);
-            this.Logger.LogInformation("Mutation Complete");
+            this.Logger.LogDebug("Mutation Complete");
 
             stopwatch.Stop();
             return new ScalarSiteMutateResult { Name = this.GetType().Name, Duration = stopwatch.Elapsed };
