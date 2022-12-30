@@ -22,7 +22,7 @@ internal abstract class CollectorMutator<T> : ISiteMutator
             throw new InvalidOperationException("Site with null root.");
         }
 
-        this.Logger.LogInformation("Mutation Started");
+        this.Logger.LogDebug("Mutation Started");
         var stopwatch = Stopwatch.StartNew();
 
         var collections = new ConcurrentBag<T>();
@@ -31,7 +31,7 @@ internal abstract class CollectorMutator<T> : ISiteMutator
         await this.PostCollection(site, collections, cancellationToken);
 
         stopwatch.Stop();
-        this.Logger.LogInformation("Mutation Complete");
+        this.Logger.LogDebug("Mutation Complete");
         return new ScalarSiteMutateResult { Name = this.GetType().Name, Duration = stopwatch.Elapsed };
     }
 

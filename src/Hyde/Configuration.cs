@@ -19,38 +19,38 @@ using Hyde.Serializer;
 using Hyde.Services.FileFinder;
 using Hyde.Services.LinkResolver;
 using Hyde.Services.Metadata;
+using Hyde.Services.ProjectResolver;
 using Microsoft.Extensions.Logging.Console;
 
 namespace Hyde;
 
 internal static class Configuration
 {
-    public static IConfiguration CreateConfiguration(string projectFile)
-    {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .AddJsonFile(projectFile)
-            .Build();
-        return configuration;
-    }
+    public static IConfiguration LoadCoreConfiguration() => new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json")
+        .Build();
 
-    public static IServiceProvider CreateServiceProvider(IConfiguration configuration)
-    {
-        var provider = new ServiceCollection()
-            .AddSingleton(configuration)
-            .AddLogger(configuration)
-            .AddReader(configuration)
-            .AddMutators(configuration)
-            .AddSerializer(configuration)
-            .AddBuilder()
-            .BuildServiceProvider();
-        return provider;
-    }
+    public static IConfiguration ExtendProjectConfiguration(IConfiguration coreConfiguration, string projectFile) => new ConfigurationBuilder()
+        .AddConfiguration(coreConfiguration, true)
+        .AddJsonFile(projectFile, false)
+        .Build();
+
+    public static IServiceCollection LoadCoreServices(IConfiguration coreConfig) => new ServiceCollection()
+        .AddLogger(coreConfig)
+        .AddSingleton<IProjectResolver, ProjectResolver>();
+
+    public static IServiceProvider LoadProjectServices(IServiceCollection coreServices, IConfiguration projectConfig) => new ServiceCollection()
+        .AddRange(coreServices)
+        .AddReader(projectConfig)
+        .AddMutators(projectConfig)
+        .AddSerializer(projectConfig)
+        .AddBuilder()
+        .BuildServiceProvider();
 
     private static IServiceCollection AddLogger(this IServiceCollection services, IConfiguration configuration) => services
         .AddLogging(builder => builder
             .AddConfiguration(configuration.GetSection("Logging"))
-            .AddConsole(options => options.FormatterName = "testFormatter")
+            .AddConsole(options => options.FormatterName = nameof(ColoredConsoleFormatter))
             .AddConsoleFormatter<ColoredConsoleFormatter, ConsoleFormatterOptions>()
         );
 

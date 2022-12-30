@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "hydedotnet": {
+      "version": "0.0.4",
+      "commands": [
+        "hyde"
+      ]
+    }
+  }
+}

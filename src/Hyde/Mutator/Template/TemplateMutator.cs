@@ -1,4 +1,4 @@
-﻿using Hyde.Mutator.Template.Layout;
+using Hyde.Mutator.Template.Layout;
 using Scriban;
 using Scriban.Runtime;
 using Scriban.Syntax;
@@ -37,11 +37,11 @@ internal class TemplateMutator : ISiteMutator
         try
         {
             var stopwatch = Stopwatch.StartNew();
-            this._logger.LogInformation("Mutation Started");
+            this._logger.LogDebug("Mutation Started");
 
             var perfCache = new LayoutPerformanceCache();
             await this.MutateDirectory(site, site.Root, perfCache, cancellationToken);
-            this._logger.LogInformation("Mutation Complete");
+            this._logger.LogDebug("Mutation Complete");
 
             var results = perfCache.GetAverageTimes()
                 .OrderByDescending(kvp => kvp.Value)

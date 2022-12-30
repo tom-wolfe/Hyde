@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
 
@@ -6,7 +6,7 @@ namespace Hyde.Logging;
 
 internal class ColoredConsoleFormatter : ConsoleFormatter
 {
-    public ColoredConsoleFormatter() : base("testFormatter") { }
+    public ColoredConsoleFormatter() : base(nameof(ColoredConsoleFormatter)) { }
 
     public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
     {
@@ -17,8 +17,11 @@ internal class ColoredConsoleFormatter : ConsoleFormatter
         textWriter.Write(DateTime.UtcNow.ToString("hh:mm:ss.fff", CultureInfo.CurrentCulture));
         textWriter.Write(" ");
         textWriter.WriteColored($"[{logEntry.LogLevel}]", GetLogLevelConsoleColors(logEntry.LogLevel));
-        textWriter.Write(" ");
-        textWriter.WriteColored($"[{logEntry.Category.Split('.').Last()}]", new ConsoleColors(ConsoleColor.Cyan, ConsoleColor.Black));
+        if (!string.IsNullOrWhiteSpace(logEntry.Category))
+        {
+            textWriter.Write(" ");
+            textWriter.WriteColored($"[{logEntry.Category.Split('.').Last()}]", new ConsoleColors(ConsoleColor.Cyan, ConsoleColor.Black));
+        }
         textWriter.Write(" ");
         textWriter.Write($"{message}");
         textWriter.Write(Environment.NewLine);
@@ -27,12 +30,12 @@ internal class ColoredConsoleFormatter : ConsoleFormatter
     private static ConsoleColors GetLogLevelConsoleColors(LogLevel logLevel) =>
         logLevel switch
         {
-            LogLevel.Trace => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
-            LogLevel.Debug => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
-            LogLevel.Information => new ConsoleColors(ConsoleColor.DarkGreen, ConsoleColor.Black),
-            LogLevel.Warning => new ConsoleColors(ConsoleColor.Yellow, ConsoleColor.Black),
-            LogLevel.Error => new ConsoleColors(ConsoleColor.Black, ConsoleColor.DarkRed),
-            LogLevel.Critical => new ConsoleColors(ConsoleColor.White, ConsoleColor.DarkRed),
+            LogLevel.Trace => ConsoleColors.Default,
+            LogLevel.Debug => ConsoleColors.Default,
+            LogLevel.Information => ConsoleColors.Information,
+            LogLevel.Warning => ConsoleColors.Warning,
+            LogLevel.Error => ConsoleColors.Error,
+            LogLevel.Critical => ConsoleColors.Critical,
             _ => new ConsoleColors(null, null)
         };
 }

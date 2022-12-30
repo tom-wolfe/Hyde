@@ -1,19 +1,16 @@
-﻿namespace Hyde.Reader;
+namespace Hyde.Reader;
 
 internal class SiteReader : ISiteReader
 {
-    private readonly ILogger _logger;
     private readonly SiteReaderOptions _options;
 
-    public SiteReader(ILogger<SiteReader> logger, IOptions<SiteReaderOptions> options)
+    public SiteReader(IOptions<SiteReaderOptions> options)
     {
-        this._logger = logger;
         this._options = options.Value;
     }
 
     public Task<SiteReadResult> Read()
     {
-        this._logger.LogInformation("Reading site");
         var stopwatch = Stopwatch.StartNew();
         var site = new Site(this._options.SourceDirectory);
         var root = ReadDirectory(new DirectoryInfo(this._options.SourceDirectory), "");

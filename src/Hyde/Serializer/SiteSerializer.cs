@@ -1,4 +1,4 @@
-﻿namespace Hyde.Serializer;
+namespace Hyde.Serializer;
 
 class SiteSerializer : ISiteSerializer
 {
@@ -19,16 +19,16 @@ class SiteSerializer : ISiteSerializer
         }
 
         var stopwatch = Stopwatch.StartNew();
-        this._logger.LogInformation("Serializing site to {Directory}", this._options.OutputDirectory);
+        this._logger.LogDebug("Writing to {Directory}", this._options.OutputDirectory);
         if (this._options.Clean)
         {
-            this._logger.LogInformation("Cleaning output directory");
+            this._logger.LogDebug("Cleaning output directory");
             DirectoryUtils.Clean(this._options.OutputDirectory);
         }
         await SerializeDirectory(site.Root, this._options.OutputDirectory, false, cancellationToken);
 
         stopwatch.Stop();
-        return new SiteSerializeResult() { Duration = stopwatch.Elapsed };
+        return new SiteSerializeResult { Duration = stopwatch.Elapsed };
     }
 
     private static Task SerializeDirectory(SiteDirectory directory, string path, bool asSubDirectory, CancellationToken cancellationToken = default)

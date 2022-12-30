@@ -1,4 +1,4 @@
-﻿namespace Hyde.Mutator.Assets;
+namespace Hyde.Mutator.Assets;
 
 internal class AssetsMutator : ISiteMutator
 {
@@ -13,7 +13,7 @@ internal class AssetsMutator : ISiteMutator
 
     public Task<ISiteMutateResult> Mutate(Site site, CancellationToken cancellationToken = default)
     {
-        this._logger.LogInformation("Mutation Started");
+        this._logger.LogDebug("Mutation Started");
         var stopwatch = Stopwatch.StartNew();
 
         foreach (var (source, target) in this._options.Assets)
@@ -30,7 +30,7 @@ internal class AssetsMutator : ISiteMutator
         }
 
         stopwatch.Stop();
-        this._logger.LogInformation("Mutation Complete");
+        this._logger.LogDebug("Mutation Complete");
 
         return Task.FromResult((ISiteMutateResult)new ScalarSiteMutateResult
         {

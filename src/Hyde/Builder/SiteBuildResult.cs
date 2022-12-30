@@ -1,4 +1,4 @@
-﻿using Hyde.Mutator;
+using Hyde.Mutator;
 using Hyde.Reader;
 using Hyde.Serializer;
 
@@ -18,11 +18,11 @@ internal class SiteBuildResult
     public SiteSerializeResult Serialize { get; }
     public TimeSpan Duration => this.Read.Duration + this.Mutate.Duration + this.Serialize.Duration;
 
-    public void Log(ILogger logger, int padding)
+    public void Write(ILogger logger, int padding)
     {
-        this.Read.Log(logger, padding);
-        this.Mutate.Log(logger, padding);
-        this.Serialize.Log(logger, padding);
+        this.Read.Write(logger, padding);
+        this.Mutate.Write(logger, padding);
+        this.Serialize.Write(logger, padding);
         logger.LogInformation("{Name}: {Time}", "Total".PadRight(padding), this.Duration);
     }
 }
